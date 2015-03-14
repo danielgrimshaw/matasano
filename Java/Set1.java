@@ -1,8 +1,10 @@
+import java.math.*;
+
 public class Set1 {
 	public static void main(String [] args) {
 		String text = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d";
 		for (int i = 0; i < text.length(); i += 2)
-			System.out.print(from_hex_to_decimal(toHex(text.substring(i, i+2))));
+			System.out.print(from_hex_to_decimal((char)(Integer.parseInt(text.substring(i, i+2), 16))));
 	}
 	
 	public static int from_hex_to_decimal(char hex) {
@@ -14,6 +16,6 @@ public class Set1 {
 	 }
 	
 	public static String toHex(String arg) {
-		return String.format("%040x", new BigInteger(1, arg.getBytes()));
+		return String.format("%x", new BigInteger(1, arg.getBytes()));
 	}
 }
