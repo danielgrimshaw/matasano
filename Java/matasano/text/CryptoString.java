@@ -1,37 +1,27 @@
-import java.math.*;
-
 package matasano.text;
 
-public class HexString extends String {
-   private String hexText;
+import java.math.*;
+
+public class CryptoString {
    private final static char [] letters = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9','+','/'};
-	
-   public static void main(String [] args) {
-      Set1 test = new Set1("1c0111001f010100061a024b53535009181c");
-      Set1 key = new Set1("686974207468652062756c6c277320657965");
-      //System.out.println(test.fromHexToString());
-      System.out.println(test.fixedXOR(key.asString()).toHex());
+
+   private String data;
+   
+   public CryptoString() {
+      this("NO DATA GIVEN!");
    }
-	
-   public Set1() {
-      this("49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d");
+   
+   public CryptoString(String data) {
+      this.data = data;
    }
-	
-   public Set1(String hexText) {
-      this.hexText = hexText;
+   
+   public HexString toHex() {
+      return new HexString(String.format("%x", new BigInteger(1, this.data.getBytes())));
    }
-	
-   public String asString() {
+   
+   public CryptoString asBase64() {
       String ret = new String();
-      for (int i = 0; i < this.hexText.length(); i += 2)
-         ret += (char)(Integer.parseInt(this.hexText.substring(i, i+2), 16));
-      return ret;
-   }
-	
-   public String toBase64() {
-      String ascii = this.fromHexToString();
-      String ret = new String();
-      byte [] strBytes = ascii.getBytes();
+      byte [] strBytes = data.getBytes();
       boolean [] bits = getBits(strBytes);
       int [] encoded = new int [bits.length/6];
       for (int i = 0; i < bits.length; i += 6) {
@@ -44,9 +34,9 @@ public class HexString extends String {
    	
       for (int i = 0; i < encoded.length; i++)
          ret += intToBase64(encoded[i]);
-      return ret;
+      return new CryptoString(ret);
    }
-	
+   
    private boolean [] getBits(byte [] from) {
       boolean [] bits = new boolean [from.length*8];
       for (int i = 0; i < from.length; i++) {
@@ -62,16 +52,22 @@ public class HexString extends String {
       }
       return bits;
    }
-	
+   
+   	
    private char intToBase64(int i) {
       return letters[i];
    }
-
+   
+   
    public CryptoString fixedXOR(String keyString) {
-      char [] string = this.fromHexToString().toCharArray();
+      char [] string = this.data.toCharArray();
       char [] key = keyString.toCharArray();
       for(int i = 0; i < string.length; i++)
          string[i] = (char)(string[i]^key[i]);
       return new CryptoString(new String(string));
+   }
+   
+   public String toString() {
+      return this.data;
    }
 }
