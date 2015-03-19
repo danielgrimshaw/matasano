@@ -10,7 +10,7 @@ public class HexString {
       CryptoString test = new HexString("1c0111001f010100061a024b53535009181c").asCryptoString();
       HexString key = new HexString("686974207468652062756c6c277320657965");
       //System.out.println(test.fromHexToString());
-      System.out.println(test.fixedXOR(key.asString()).toHex());
+      System.out.println(test.asBase64()+"\n"+test.fixedXOR(key.asString()).toHex());
    }
 	
    public HexString() {
