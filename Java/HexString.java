@@ -1,6 +1,8 @@
 import java.math.*;
 
-public class Set1 {
+package matasano.text;
+
+public class HexString extends String {
    private String hexText;
    private final static char [] letters = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9','+','/'};
 	
@@ -8,7 +10,7 @@ public class Set1 {
       Set1 test = new Set1("1c0111001f010100061a024b53535009181c");
       Set1 key = new Set1("686974207468652062756c6c277320657965");
       //System.out.println(test.fromHexToString());
-      System.out.println(toHex(test.fixedXOR(key.fromHexToString())));
+      System.out.println(toHex(test.fixedXOR(key.asString())));
    }
 	
    public Set1() {
@@ -19,14 +21,14 @@ public class Set1 {
       this.hexText = hexText;
    }
 	
-   public String fromHexToString() {
+   public String asString() {
       String ret = new String();
       for (int i = 0; i < this.hexText.length(); i += 2)
          ret += (char)(Integer.parseInt(this.hexText.substring(i, i+2), 16));
       return ret;
    }
 	
-   public String fromHexToBase64() {
+   public String toBase64() {
       String ascii = this.fromHexToString();
       String ret = new String();
       byte [] strBytes = ascii.getBytes();
@@ -64,11 +66,6 @@ public class Set1 {
    private char intToBase64(int i) {
       return letters[i];
    }
-		
-   public static String toHex(String arg) {
-      return String.format("%x", new BigInteger(1, arg.getBytes()));
-   }
-   
 
    public String fixedXOR(String keyString) {
       char [] string = this.fromHexToString().toCharArray();
