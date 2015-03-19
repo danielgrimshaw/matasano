@@ -10,7 +10,7 @@ public class HexString extends String {
       Set1 test = new Set1("1c0111001f010100061a024b53535009181c");
       Set1 key = new Set1("686974207468652062756c6c277320657965");
       //System.out.println(test.fromHexToString());
-      System.out.println(toHex(test.fixedXOR(key.asString())));
+      System.out.println(test.fixedXOR(key.asString()).toHex());
    }
 	
    public Set1() {
@@ -67,11 +67,11 @@ public class HexString extends String {
       return letters[i];
    }
 
-   public String fixedXOR(String keyString) {
+   public CryptoString fixedXOR(String keyString) {
       char [] string = this.fromHexToString().toCharArray();
       char [] key = keyString.toCharArray();
       for(int i = 0; i < string.length; i++)
          string[i] = (char)(string[i]^key[i]);
-      return new String(string);
+      return new CryptoString(new String(string));
    }
 }
