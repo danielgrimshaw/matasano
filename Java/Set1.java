@@ -8,7 +8,7 @@ public class Set1 {
       Set1 test = new Set1("1c0111001f010100061a024b53535009181c");
       Set1 key = new Set1("686974207468652062756c6c277320657965");
       //System.out.println(test.fromHexToString());
-      System.out.println(toHex(test.fixedXOR(test.fromHexToString(), key.fromHexToString())));
+      System.out.println(toHex(test.fixedXOR(key.fromHexToString())));
    }
 	
    public Set1() {
@@ -70,10 +70,10 @@ public class Set1 {
    }
    
 
-   public String fixedXOR(String chars, String keyString) {
-      char [] string = chars.toCharArray();
+   public String fixedXOR(String keyString) {
+      char [] string = this.fromHexToString().toCharArray();
       char [] key = keyString.toCharArray();
-      for(int i = 0; i < chars.length(); i++)
+      for(int i = 0; i < string.length; i++)
          string[i] = (char)(string[i]^key[i]);
       return new String(string);
    }
