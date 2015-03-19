@@ -5,9 +5,10 @@ public class Set1 {
    private final static char [] letters = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9','+','/'};
 	
    public static void main(String [] args) {
-      Set1 test = new Set1(/*"1c0111001f010100061a024b53535009181c"*/);
-   	System.out.println(test.fromHexToString());
-      System.out.println(test.fromHexToBase64());
+      Set1 test = new Set1("1c0111001f010100061a024b53535009181c");
+      Set1 key = new Set1("686974207468652062756c6c277320657965");
+      //System.out.println(test.fromHexToString());
+      System.out.println(toHex(test.fixedXOR(test.fromHexToString(), key.fromHexToString())));
    }
 	
    public Set1() {
@@ -69,10 +70,11 @@ public class Set1 {
    }
    
 
-   public String fixedXOR(String chars) {
+   public String fixedXOR(String chars, String keyString) {
       char [] string = chars.toCharArray();
+      char [] key = keyString.toCharArray();
       for(int i = 0; i < chars.length(); i++)
-         string[i] = (char)(string[i]^letters[i]);
+         string[i] = (char)(string[i]^key[i]);
       return new String(string);
    }
 }
