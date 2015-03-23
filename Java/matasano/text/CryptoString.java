@@ -70,4 +70,11 @@ public class CryptoString {
    public String toString() {
       return this.data;
    }
+   
+   public boolean mightBeEnglish() {
+      for (char letter : letters)
+         if (this.toString().indexOf(letter) > 0)
+            return true;
+      return false;
+   }
 }
