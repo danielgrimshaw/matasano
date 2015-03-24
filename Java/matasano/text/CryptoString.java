@@ -74,20 +74,13 @@ public class CryptoString {
    public boolean mightBeEnglish() {
       if (this.toString().indexOf(" ") < 0)
          return false;
-      for (char nonLetter = 0; nonLetter < 32; nonLetter++) {
-         char [] test = {nonLetter};
-         if (this.toString().indexOf(new String(test)) > 0)
-            return false;
-      }
       
-      for (char nonLetter = 127; nonLetter < Character.MAX_VALUE; nonLetter++) {
-         char [] test = {nonLetter};
-         if (this.toString().indexOf(new String(test)) > 0)
-            return false;
-      }
+      for (char character : this.toString().toCharArray())
+         if (character < 32 || character > 126)
+			return false;
       
       for (char letter : letters)
-         if (this.toString().indexOf(letter) > 0)
+         if (this.toString().indexOf(letter) >= 0)
             return true;
       return false;
    }

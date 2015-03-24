@@ -1,23 +1,27 @@
 package matasano.text;
 
+import java.io.*;
+import java.util.*;
 import java.math.*;
 import matasano.text.*;
 
 public class HexString {
    private String hexText;
 	
-   public static void main(String [] args) {
-	  //System.out.println((int)(Character.MAX_VALUE));
-	  //char [] commonLetters = {'E','T','A','O','I','N','S','H','R','D','L','U','e','t','a','o','i','n','s','h','r','d','l','u'};
-      CryptoString test = new HexString("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736").asCryptoString();
-      for (char letter = 0; letter < Character.MAX_VALUE; letter++) {
-         char [] key = new char [test.toString().length()];
-         for (int i = 0; i < key.length; i++)
-            key[i] = letter;
-      CryptoString ans = test.fixedXOR(new String(key));
-      if (ans.mightBeEnglish())
-         System.out.println("\'"+letter+"\': "+ans);
-	}
+   public static void main(String [] args) throws FileNotFoundException {
+      CryptoFile file = new CryptoFile(new File("4.txt"));
+      int count = 0;
+	  for (CryptoString encoded : file.read()) {
+         for (char letter = 0; letter < Character.MAX_VALUE; letter++) {
+            char [] key = new char [encoded.toString().length()];
+            for (int i = 0; i < key.length; i++)
+               key[i] = letter;
+            CryptoString ans = encoded.fixedXOR(new String(key));
+            if (ans.mightBeEnglish())
+               System.out.println(count+": \'"+letter+"\': "+ans);
+         }
+         count++;
+      }
    }
 	
    public HexString() {
