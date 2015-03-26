@@ -9,7 +9,7 @@ public class HexString {
    private String hexText;
 	
    public static void main(String [] args) throws FileNotFoundException {
-      CryptoFile file = new CryptoFile(new File("4.txt"));
+      CryptoFile file = new CryptoFile("4.txt");
       int count = 0;
 	  for (CryptoString encoded : file.read()) {
          for (char letter = 0; letter < Character.MAX_VALUE; letter++) {
