@@ -3,25 +3,32 @@ package matasano.text;
 import java.io.*;
 import java.util.*;
 import java.math.*;
+
+//All of the matasano.* was programmed by me
 import matasano.text.*;
+import matasano.files.*;
 
 public class HexString {
    private String hexText;
 	
    public static void main(String [] args) throws FileNotFoundException {
-      /*CryptoFile file = new CryptoFile("4.txt");
+      CryptoTextFile file = new FixedXORFile("4.txt");
       int count = 0;
-	  for (CryptoString encoded : file.read()) {
+      String [] text = file.read();
+      FixedXOR [] encodedText = new FixedXOR [text.length];
+      for (int i = 0; i < text.length; i++)
+         encodedText[i] = new FixedXOR(text[i]);
+	  for (FixedXOR encoded : encodedText) {
          for (char letter = 0; letter < Character.MAX_VALUE; letter++) {
             char [] key = new char [encoded.toString().length()];
             for (int i = 0; i < key.length; i++)
                key[i] = letter;
-            CryptoString ans = encoded.fixedXOR(new String(key));
+            FixedXOR ans = new FixedXOR(encoded.decode(new String(key)));
             if (ans.mightBeEnglish())
                System.out.println(count+": \'"+letter+"\': "+ans);
          }
          count++;
-      }*/
+      }
    }
 	
    public HexString() {
