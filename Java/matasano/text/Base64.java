@@ -30,7 +30,7 @@ public class Base64 extends CryptoString {
    }
    
    public String decode() {
-      return "Base64:decode(void) NOT IMPLEMENTED YET!!!"
+      return "Base64:decode(void) NOT IMPLEMENTED YET!!!";
    }
    
    public String encode(String key) {

@@ -4,27 +4,27 @@ import java.math.*;
 
 public class XOR extends CryptoString {
    public XOR() {
-      super()
+      super();
    }
    
    public XOR(String data) {
       super(data);
    }
    
-   public String encrypt() {
+   public String encode() {
       return "XOR is not yet implemented!";
    }
    
-   public String decrypt() {
-      return this.encrypt();
+   public String decode() {
+      return this.encode();
    }
    
-   public String encrypt(String key) {
-      return this.encrypt();
+   public String encode(String key) {
+      return this.encode();
    }
    
-   public String decrypt(String key) {
-      return this.encrypt();
+   public String decode(String key) {
+      return this.encode();
    }
    
    public boolean mightBeEnglish() {

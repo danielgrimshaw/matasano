@@ -3,11 +3,11 @@ package matasano.text;
 import java.math.*;
 
 public class FixedXOR extends XOR {
-   public XOR() {
-      super()
+   public FixedXOR() {
+      super();
    }
    
-   public XOR(String data) {
+   public FixedXOR(String data) {
       super(data);
    }
    

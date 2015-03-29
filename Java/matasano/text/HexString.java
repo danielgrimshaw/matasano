@@ -9,7 +9,7 @@ public class HexString {
    private String hexText;
 	
    public static void main(String [] args) throws FileNotFoundException {
-      CryptoFile file = new CryptoFile("4.txt");
+      /*CryptoFile file = new CryptoFile("4.txt");
       int count = 0;
 	  for (CryptoString encoded : file.read()) {
          for (char letter = 0; letter < Character.MAX_VALUE; letter++) {
@@ -21,7 +21,7 @@ public class HexString {
                System.out.println(count+": \'"+letter+"\': "+ans);
          }
          count++;
-      }
+      }*/
    }
 	
    public HexString() {
@@ -37,10 +37,6 @@ public class HexString {
       for (int i = 0; i < this.hexText.length(); i += 2)
          ret += (char)(Integer.parseInt(this.hexText.substring(i, i+2), 16));
       return ret;
-   }
-   
-   public CryptoString asCryptoString() {
-      return new CryptoString(this.asString());
    }
    
    public String toString() {

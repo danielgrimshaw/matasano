@@ -9,11 +9,11 @@ public abstract class CryptoTextFile {
    private final File data;
    private final Scanner dataReader;
    
-   public CryptoFile(String filename) throws FileNotFoundException {
+   public CryptoTextFile(String filename) throws FileNotFoundException {
       this(new File(filename));
    }
    
-   public CryptoFile(File file) throws FileNotFoundException {
+   public CryptoTextFile(File file) throws FileNotFoundException {
       this.data = file;
       try {
          this.dataReader = new Scanner(file);
